@@ -1,12 +1,12 @@
-export default {
+module.exports = {
 	/**
 	 * token保存至localStorage中的键
 	 */
-	tokenKey: 'webapp-User-token',
+	tokenKey: 'webapp-user-token',
 	/**
 	 * 设置在xhr headers中token的键
 	 */
-	tokenKeyInRequest: 'userToken',
+	tokenKeyInRequest: 'x-token',
 	/**
 	 * 不同环境下, 发送请求的前缀
 	 */
@@ -29,13 +29,9 @@ export default {
 	 */
 	assetDir: 'static',
 	/**
-	 * 静态资源路径前缀
+	 * 静态资源路径前缀及网站二级目录
 	 */
 	publicPath: '/',
-	/**
-	 * 网站二级目录
-	 */
-	base: '/web/',
 	/**
 	 * 需要注入的全局数据（编译时使用）
 	 */
