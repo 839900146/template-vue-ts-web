@@ -22,7 +22,7 @@ const proxys = {
 
 // -------------------------------------------以下代码不要动------------------------------------
 
-module.exports = proxys[ENV].slice().reduce((total, item) => {
+module.exports = (proxys[ENV] || []).slice().reduce((total, item) => {
 	total[item.prefix] = {
 		target: item.target,
 		pathRewrite: item.pathRewrite || null,
