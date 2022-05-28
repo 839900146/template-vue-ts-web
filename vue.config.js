@@ -17,5 +17,6 @@ module.exports = defineConfig({
 			.set('@views', path.join(__dirname, './src/views'))
 			.set('@assets', path.join(__dirname, './src/assets'))
 			.set('@comp', path.join(__dirname, './src/components'))
+			.set('@store', path.join(__dirname, './src/store'))
 	},
 })

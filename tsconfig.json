@@ -23,6 +23,7 @@
       "@router/*":["src/router/*"],
       "@views/*":["src/views/*"],
       "@comp/*":["src/components/*"],
+      "@store/*":["src/store/*"],
     },
     "lib": [
       "esnext",
