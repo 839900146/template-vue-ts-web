@@ -11,7 +11,10 @@ export default defineStore('users', {
 	},
 	// 与vuex一致
 	getters: {
-		getToken: (state) => state.token,
+		getToken(state) {
+			// 也可以通过this访问，如this.token
+			return state.token
+		},
 	},
 	// actions 可以是同步也可以是异步
 	actions: {

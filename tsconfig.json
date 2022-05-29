@@ -21,9 +21,11 @@
       ],
       "@assets/*":["src/assets/*"],
       "@router/*":["src/router/*"],
+      "@services/*":["src/services/*"],
       "@views/*":["src/views/*"],
       "@comp/*":["src/components/*"],
       "@store/*":["src/store/*"],
+      "@utils/*":["src/utils/*"],
     },
     "lib": [
       "esnext",

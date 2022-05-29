@@ -14,9 +14,11 @@ module.exports = defineConfig({
 		config.resolve.alias
 			.set('@', path.join(__dirname, './src'))
 			.set('@router', path.join(__dirname, './src/router'))
+			.set('@services', path.join(__dirname, './src/services'))
 			.set('@views', path.join(__dirname, './src/views'))
 			.set('@assets', path.join(__dirname, './src/assets'))
 			.set('@comp', path.join(__dirname, './src/components'))
 			.set('@store', path.join(__dirname, './src/store'))
+			.set('@utils', path.join(__dirname, './src/utils'))
 	},
 })
