@@ -27,10 +27,14 @@ npm run commit
 > 提交代码一律使用 `npm run commit`
 
 ### 运行配置
-在 `config/server.ts` 中可对 `token`，`请求前缀`, `打包路径` 等进行配置
+在 `config/server.ts` 中可对 `打包路径` 等进行配置
 
 ### 反向代理
 在 `config/proxy.ts` 中可配置前端开发环境下的反向代理配置
+
+### 环境变量
+在根目录下，存在一个环境变量配置文件 `.env`
+在 `.env` 中，可设置token的key、在请求头中的字段名、请求前缀
 
 ### 路径映射
 系统内置如下alias映射：

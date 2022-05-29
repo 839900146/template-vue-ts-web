@@ -5,11 +5,13 @@
 		<h1>{{ store.userinfo }}</h1>
 		<h1>{{ store.getToken }}</h1>
 		<button @click="click">点击</button>
+		<button @click="fn">发送请求</button>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { fetchUserInfo } from '@/services'
 // 要使用哪个store，就导入哪个
 import useStore from '@/store/users'
 
@@ -23,7 +25,16 @@ export default defineComponent({
 			store.login()
 		}
 
-		return { click, store }
+		async function fn() {
+			const result = await fetchUserInfo<{ username: string; token: 'xxx' }>()
+			if (result.status !== true) {
+				console.log('获取数据')
+			} else {
+				console.log(result.data?.token)
+			}
+		}
+
+		return { click, store, fn }
 	},
 })
 </script>
