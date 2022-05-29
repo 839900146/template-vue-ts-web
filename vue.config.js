@@ -3,11 +3,13 @@ const path = require('path')
 const CompressionWebpackPlugin = 'compression-webpack-plugin'
 const server = require('./config/server.ts')
 const proxys = require('./config/proxy.ts')
+const isDev = process.env.APP_ENV === 'dev'
+
 module.exports = defineConfig({
 	transpileDependencies: true,
 	publicPath: server.publicPath,
 	assetsDir: server.assetDir,
-	productionSourceMap: false,
+	productionSourceMap: isDev,
 	devServer: {
 		proxy: proxys,
 	},
@@ -30,6 +32,15 @@ module.exports = defineConfig({
 		resolve: {
 			modules: [path.resolve(__dirname, './src'), path.resolve(__dirname, './node_modules')],
 		},
+		module: {
+			// 不对下列文件进行编译
+			noParse: /(loadsh|moment|jquery|chartjs|vue|react)/,
+		},
+		externals: {
+			axios: 'axios',
+			vue: 'Vue',
+			'vue-router': 'VueRouter',
+		},
 	},
 	chainWebpack: (config) => {
 		config.resolve.alias
@@ -41,6 +52,17 @@ module.exports = defineConfig({
 			.set('@comp', path.join(__dirname, './src/components'))
 			.set('@store', path.join(__dirname, './src/store'))
 			.set('@utils', path.join(__dirname, './src/utils'))
+
+		config.plugin('html').tap((args) => {
+			args[0].cdn = {
+				js: [
+					'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js',
+					'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.13/vue.global.min.js',
+					'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/4.0.3/vue-router.global.min.js',
+				],
+			}
+			return args
+		})
 
 		if (process.env.NODE_ENV === 'production') {
 			config.plugin('compression-webpack-plugin').use(CompressionWebpackPlugin, [
