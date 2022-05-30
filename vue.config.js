@@ -63,6 +63,7 @@ module.exports = defineConfig({
 						'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.13/vue.global.min.js',
 						'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/4.0.3/vue-router.global.min.js',
 					],
+					css: [],
 				}
 				return args
 			})
