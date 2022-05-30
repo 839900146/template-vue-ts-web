@@ -7,6 +7,15 @@ const routes: Array<RouteRecordRaw> = [
 		name: 'home',
 		component: HomeView,
 	},
+	{
+		name: '404',
+		path: '/404',
+		component: () => import('@/views/NotFount.vue'),
+	},
+	{
+		path: '/:catchAll(.*)',
+		redirect: '/404',
+	},
 ]
 
 const router = createRouter({
