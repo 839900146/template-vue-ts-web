@@ -1,27 +1,14 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import routes from './routes'
+import beforeEach from './beforeEach'
 const ENV = process.env
-
-const routes: Array<RouteRecordRaw> = [
-	{
-		path: '/',
-		name: 'home',
-		component: HomeView,
-	},
-	{
-		name: '404',
-		path: '/404',
-		component: () => import('@/views/NotFount.vue'),
-	},
-	{
-		path: '/:catchAll(.*)',
-		redirect: '/404',
-	},
-]
 
 const router = createRouter({
 	history: createWebHistory(ENV.BASE_URL),
 	routes,
 })
+
+// 集成路由守卫
+beforeEach(router)
 
 export default router
