@@ -1,14 +1,14 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 const CompressionWebpackPlugin = 'compression-webpack-plugin'
-const server = require('./config/server.ts')
 const proxys = require('./config/proxy.ts')
-const isDev = process.env.APP_ENV === 'dev'
+const ENV = process.env
+const isDev = ENV.APP_ENV === 'dev'
 
 module.exports = defineConfig({
 	transpileDependencies: true,
-	publicPath: server.publicPath,
-	assetsDir: server.assetDir,
+	publicPath: ENV.VUE_APP_PUBLIC_PATH,
+	assetsDir: ENV.VUE_APP_ASSET_DIR,
 	productionSourceMap: isDev,
 	devServer: {
 		proxy: proxys,
@@ -50,14 +50,14 @@ module.exports = defineConfig({
 			.set('@store', path.join(__dirname, './src/store'))
 			.set('@utils', path.join(__dirname, './src/utils'))
 
-		if (server.openCDN) {
+		if (ENV.VUE_APP_OPEN_CDN === 'true') {
 			config.set('externals', {
 				axios: 'axios',
 				vue: 'Vue',
 				'vue-router': 'VueRouter',
 			})
 			config.plugin('html').tap((args) => {
-				args[0].openCDN = server.openCDN
+				args[0].openCDN = ENV.VUE_APP_OPEN_CDN
 				args[0].cdn = {
 					js: [
 						'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js',
@@ -70,7 +70,7 @@ module.exports = defineConfig({
 			})
 		}
 
-		if (process.env.NODE_ENV === 'production') {
+		if (isDev === false) {
 			config.plugin('compression-webpack-plugin').use(CompressionWebpackPlugin, [
 				{
 					filename: '[path][base].gz',

@@ -1,6 +1,11 @@
-const server = require('./server.ts')
-const ProxyServer = server.proxyServer
 const ENV = process.env.APP_ENV || 'dev'
+// 代理服务器列表
+const ProxyServer = {
+	server1: 'http://localhost:8001',
+	server2: 'http://localhost:8002',
+	server3: 'http://localhost:8003',
+	server4: 'http://localhost:8004',
+}
 
 const proxys = {
 	// 开发环境代理

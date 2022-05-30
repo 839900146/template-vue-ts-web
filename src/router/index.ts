@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/Home.vue'
+const ENV = process.env
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -19,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
+	history: createWebHistory(ENV.BASE_URL),
 	routes,
 })
 

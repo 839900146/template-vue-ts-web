@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-
+const ENV = process.env
 interface IResType<T = unknown> {
 	code: number
 	data?: T
@@ -8,15 +8,15 @@ interface IResType<T = unknown> {
 }
 
 // 设置请求头和请求路径
-axios.defaults.baseURL = process.env.VUE_APP_AXIOS_BASE_URL
+axios.defaults.baseURL = ENV.VUE_APP_AXIOS_BASE_URL
 axios.defaults.timeout = 60 * 1000
 
 // 请求拦截
 axios.interceptors.request.use(
 	(config): AxiosRequestConfig => {
-		const token = window.localStorage.getItem(process.env.VUE_APP_TOKEN_KEY)
+		const token = window.localStorage.getItem(ENV.VUE_APP_TOKEN_KEY)
 		if (token && config.headers) {
-			config.headers[process.env.VUE_APP_TOKEN_IN_HEADER_KEY] = token
+			config.headers[ENV.VUE_APP_TOKEN_IN_HEADER_KEY] = token
 		}
 		return config
 	},
