@@ -16,4 +16,8 @@ module.exports = {
 	 * 静态资源路径前缀及网站二级目录
 	 */
 	publicPath: '/',
+	/**
+	 * 开启CDN(vue, vue-router, axios)
+	 */
+	openCDN: true,
 }

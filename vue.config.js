@@ -34,12 +34,8 @@ module.exports = defineConfig({
 		},
 		module: {
 			// 不对下列文件进行编译
-			noParse: /(loadsh|moment|jquery|chartjs|vue|react)/,
-		},
-		externals: {
-			axios: 'axios',
-			vue: 'Vue',
-			'vue-router': 'VueRouter',
+			// 注意：不要写vue,react之类的，不然有一定几率会出现诡异的，不可预测的bug
+			noParse: /(loadsh|moment|jquery|chartjs)/,
 		},
 	},
 	chainWebpack: (config) => {
@@ -53,16 +49,24 @@ module.exports = defineConfig({
 			.set('@store', path.join(__dirname, './src/store'))
 			.set('@utils', path.join(__dirname, './src/utils'))
 
-		config.plugin('html').tap((args) => {
-			args[0].cdn = {
-				js: [
-					'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js',
-					'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.13/vue.global.min.js',
-					'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/4.0.3/vue-router.global.min.js',
-				],
-			}
-			return args
-		})
+		if (server.openCDN) {
+			config.set('externals', {
+				axios: 'axios',
+				vue: 'Vue',
+				'vue-router': 'VueRouter',
+			})
+			config.plugin('html').tap((args) => {
+				args[0].openCDN = server.openCDN
+				args[0].cdn = {
+					js: [
+						'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js',
+						'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.13/vue.global.min.js',
+						'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/4.0.3/vue-router.global.min.js',
+					],
+				}
+				return args
+			})
+		}
 
 		if (process.env.NODE_ENV === 'production') {
 			config.plugin('compression-webpack-plugin').use(CompressionWebpackPlugin, [
