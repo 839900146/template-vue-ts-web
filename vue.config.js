@@ -31,6 +31,7 @@ module.exports = defineConfig({
 		// 路径查找优化
 		resolve: {
 			modules: [path.resolve(__dirname, './src'), path.resolve(__dirname, './node_modules')],
+			extensions: ['.ts', '.js', '.vue', '.json'],
 		},
 		module: {
 			// 不对下列文件进行编译
